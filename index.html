@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SwiggaReps</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="theme-color" content="#7ff5c9" />
+    <link rel="icon" href="/icons/icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="SwiggaReps" />
+  </head>
+  <body>
+    <div id="authView" class="auth-view">
+      <div class="mobile-shell auth-shell">
+        <div class="auth-header">
+          <p class="eyebrow accent">SwiggaReps</p>
+          <h2>Choose your profile</h2>
+        </div>
+
+        <div class="profile-grid">
+          <button class="profile-card" type="button" data-user="Jayden" onclick="setUser('Jayden')">
+            <span class="avatar avatar-jayden">J</span>
+            <span class="name">Jayden</span>
+          </button>
+
+          <button class="profile-card" type="button" data-user="Ezra" onclick="setUser('Ezra')">
+            <span class="avatar avatar-ezra">E</span>
+            <span class="name">Ezra</span>
+          </button>
+
+          <button class="profile-card" type="button" data-user="David" onclick="setUser('David')">
+            <span class="avatar avatar-david">D</span>
+            <span class="name">David</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="appView" class="app-shell hidden">
+      <div class="mobile-shell app-mobile">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">SwiggaReps</p>
+            <h1>Squad</h1>
+          </div>
+
+          <div class="header-actions">
+            <div class="user-pill">
+              <span class="user-dot"></span>
+              <span id="currentUserName">Jayden</span>
+            </div>
+          </div>
+        </header>
+
+        <main class="main-stack">
+          <section id="home" class="panel hero-panel">
+            <div class="hero-copy">
+              <p class="eyebrow accent">This week</p>
+              <h2>Stay sharp.</h2>
+            </div>
+            <div id="summaryCards" class="hero-stats"></div>
+          </section>
+
+          <section class="panel personal-panel">
+            <div class="panel-header">
+              <h3>Your snapshot</h3>
+              <span class="feature-tag soft-tag">Live</span>
+            </div>
+            <div id="personalCard" class="personal-card"></div>
+          </section>
+
+          <section class="panel suggestions-panel">
+            <div class="panel-header">
+              <h3>Suggestions</h3>
+              <span class="small-label">Coach</span>
+            </div>
+            <div id="suggestionsGrid" class="suggestions-grid"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h3>Badges</h3>
+            </div>
+            <div id="badgeList" class="badge-list"></div>
+          </section>
+
+          <section class="panel form-panel">
+            <div class="panel-header">
+              <h3>Log workout</h3>
+            </div>
+
+            <form id="workout-form">
+              <div class="field-row two-up">
+                <label>
+                  Athlete
+                  <select id="friend" required></select>
+                </label>
+
+                <label>
+                  Date
+                  <input id="date" type="date" required />
+                </label>
+              </div>
+
+              <div class="field-row single-up">
+                <label>
+                  Exercise
+                  <input id="exercise" type="text" placeholder="Bench press" required />
+                </label>
+              </div>
+
+              <div class="field-row three-up">
+                <label>
+                  Sets
+                  <input id="sets" type="number" min="1" value="4" required />
+                </label>
+
+                <label>
+                  Reps
+                  <input id="reps" type="number" min="1" value="8" required />
+                </label>
+
+                <label>
+                  Weight (lb)
+                  <input id="weight" type="number" min="0" value="135" required />
+                </label>
+              </div>
+
+              <label>
+                Notes
+                <textarea id="notes" rows="3" placeholder="Felt strong on the last 2 sets..."></textarea>
+              </label>
+
+              <button class="primary-button" type="submit">Save workout</button>
+            </form>
+          </section>
+
+          <section class="panel leaderboard-panel">
+            <div class="panel-header">
+              <h3>Leaderboard</h3>
+            </div>
+            <div id="leaderboardList" class="leaderboard-list"></div>
+          </section>
+
+          <section id="feed" class="panel social-panel">
+            <div class="panel-header">
+              <h3>Social feed</h3>
+            </div>
+
+            <form id="feedForm" class="feed-form">
+              <textarea id="feedInput" rows="3" placeholder="Share your win, PR, or challenge update..."></textarea>
+              <button id="feedSubmit" class="primary-button" type="button">Post</button>
+            </form>
+
+            <div id="feedList" class="feed-list"></div>
+          </section>
+
+          <section id="progress" class="panel progress-panel">
+            <div class="panel-header">
+              <h3>Progress</h3>
+            </div>
+
+            <div class="mini-grid">
+              <div class="mini-card">
+                <span class="mini-label">Best PR</span>
+                <strong id="bestPr">0 lb</strong>
+              </div>
+              <div class="mini-card">
+                <span class="mini-label">Weekly volume</span>
+                <strong id="weeklyVolume">0 lb</strong>
+              </div>
+              <div class="mini-card">
+                <span class="mini-label">Streak</span>
+                <strong id="streak">0 days</strong>
+              </div>
+            </div>
+
+            <div id="progressChart" class="progress-chart" aria-label="Workout progress chart"></div>
+          </section>
+        </main>
+
+        <nav class="bottom-nav" aria-label="Main navigation">
+          <button class="nav-button active" type="button" data-target="home">
+            <span>Home</span>
+          </button>
+          <button class="nav-button" type="button" data-target="feed">
+            <span>Feed</span>
+          </button>
+          <button class="nav-button" type="button" data-target="progress">
+            <span>Progress</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="app.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.getRegistrations().then((registrations) => {
+            return Promise.all(registrations.map((registration) => registration.unregister()));
+          }).catch((error) => {
+            console.error('Service worker cleanup failed:', error);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
